@@ -1,5 +1,5 @@
 # Rice Fintech Homework - 07 - SQL
-> Technologies: Python, Postgres, Plotly
+> Technologies: Python, Postgres, SQL, Plotly
 
 ## Objective
 
