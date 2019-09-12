@@ -28,18 +28,18 @@ Analyze the data to identify possible fraudulent transactions.
 
 ## Data Modeling
 
+![ERD](assets/QuickDBD-export.png)
+
 ```
 cardholder
 -
 cardholder_id PK int
-cardholder_name string INDEX
-
+cardholder_name varchar(120)
 
 creditcard
 -
 creditcard_number PK int
 cardholder_id int FK >- cardholder.cardholder_id
-
 
 merchant
 -
@@ -47,18 +47,16 @@ merchant_id PK int
 merchant_name varchar(120)
 category_id int FK >- merchant_category.category_id
 
-
 merchant_category
 -
 category_id PK int
 category_name varchar(120)
-
 
 transaction
 -
 transaction_id PK int
 transaction_date date
 transaction_amount float
-merchant_id FK >- merchant.merchant_id
-creditcard_id FK >- creditcard.creditcard_number
+merchant_id int FK >- merchant.merchant_id
+creditcard_id int FK >- creditcard.creditcard_number
 ```
