@@ -30,33 +30,61 @@ Analyze the data to identify possible fraudulent transactions.
 
 ![ERD](assets/QuickDBD-export.png)
 
-```
-cardholder
--
-cardholder_id PK int
-cardholder_name varchar(120)
+``` sql
+CREATE TABLE "cardholder" (
+    "cardholder_id" int   NOT NULL,
+    "cardholder_name" varchar(120)   NOT NULL,
+    CONSTRAINT "pk_cardholder" PRIMARY KEY (
+        "cardholder_id"
+     )
+);
 
-creditcard
--
-creditcard_number PK int
-cardholder_id int FK >- cardholder.cardholder_id
+CREATE TABLE "creditcard" (
+    "creditcard_number" int   NOT NULL,
+    "cardholder_id" int   NOT NULL,
+    CONSTRAINT "pk_creditcard" PRIMARY KEY (
+        "creditcard_number"
+     )
+);
 
-merchant
--
-merchant_id PK int
-merchant_name varchar(120)
-category_id int FK >- merchant_category.category_id
+CREATE TABLE "merchant" (
+    "merchant_id" int   NOT NULL,
+    "merchant_name" varchar(120)   NOT NULL,
+    "category_id" int   NOT NULL,
+    CONSTRAINT "pk_merchant" PRIMARY KEY (
+        "merchant_id"
+     )
+);
 
-merchant_category
--
-category_id PK int
-category_name varchar(120)
+CREATE TABLE "merchant_category" (
+    "category_id" int   NOT NULL,
+    "category_name" varchar(120)   NOT NULL,
+    CONSTRAINT "pk_merchant_category" PRIMARY KEY (
+        "category_id"
+     )
+);
 
-transaction
--
-transaction_id PK int
-transaction_date date
-transaction_amount float
-merchant_id int FK >- merchant.merchant_id
-creditcard_id int FK >- creditcard.creditcard_number
+CREATE TABLE "transaction" (
+    "transaction_id" int   NOT NULL,
+    "transaction_date" date   NOT NULL,
+    "transaction_amount" float   NOT NULL,
+    "merchant_id" int   NOT NULL,
+    "creditcard_id" int   NOT NULL,
+    CONSTRAINT "pk_transaction" PRIMARY KEY (
+        "transaction_id"
+     )
+);
+
+ALTER TABLE "creditcard" ADD CONSTRAINT "fk_creditcard_cardholder_id" FOREIGN KEY("cardholder_id")
+REFERENCES "cardholder" ("cardholder_id");
+
+ALTER TABLE "merchant" ADD CONSTRAINT "fk_merchant_category_id" FOREIGN KEY("category_id")
+REFERENCES "merchant_category" ("category_id");
+
+ALTER TABLE "transaction" ADD CONSTRAINT "fk_transaction_merchant_id" FOREIGN KEY("merchant_id")
+REFERENCES "merchant" ("merchant_id");
+
+ALTER TABLE "transaction" ADD CONSTRAINT "fk_transaction_creditcard_id" FOREIGN KEY("creditcard_id")
+REFERENCES "creditcard" ("creditcard_number");
+
 ```
