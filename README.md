@@ -1,5 +1,5 @@
 # Rice Fintech Homework - 07 - SQL
-> Technologies: Python, Postgres, SQL, Plotly
+> Technologies: Python, Postgres, SQL, Pandas, Plotly Express, hvPlot, and SQLAlchemy
 
 ![Credit card fraudster](Assignment-07-SQL/Instructions/Images/credit_card_fraudster.jpg)
 
